@@ -46,11 +46,13 @@ function addToCart(name, price) {
 
     if (existingItem) {
         existingItem.quantity += 1;
+        existingItem.totalPrice = existingItem.quantity * price;
     } else {
         cart.push({
             name,
             price,
             quantity: 1,
+            totalPrice: price,
         });
     }
     updateCartModal();
@@ -59,24 +61,61 @@ function addToCart(name, price) {
 function updateCartModal() {
     cartItensContainer.innerHTML = '';
     let total = 0;
-
+    let quantidade = 0;
     cart.forEach(item => {
         const cartItemElement = document.createElement('div');
-        cartItemElement.innerHTML = `
-            <div>
-                <div>
-                    <p>${item.name}</p>
-                    <p>${item.price}</p>
-                    <p>${item.quantity}</p>
-                </div>
+        cartItemElement.classList.add('flex', 'justify-between', 'mb-4', 'flex-col');
 
-                <div>
-                    <button>
-                        Remover
-                    </button>
-                </div>
+        cartItemElement.innerHTML = `
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="font-medium">${item.name}</p>
+                <p>Qtd: ${item.quantity}</p>
+                <p class="font-medium mt-2">R$ ${parseFloat(item.totalPrice).toFixed(2)}</p>
             </div>
+        
+            <button class="remove-from-cart-btn" data-name='${item.name}'>
+                Remover
+            </button>
+        </div>
         `;
+        quantidade += item.quantity;
+        total += item.price * item.quantity;
         cartItensContainer.appendChild(cartItemElement);
     })
+
+    cartTotal.textContent = total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+
+    cartCounter.innerHTML = quantidade;
+}
+
+
+//removendo itens do carrinho
+cartItensContainer.addEventListener('click', function(event){
+    if(event.target.classList.contains('remove-from-cart-btn')){
+        //pegando o nome do elemento
+        const name = event.target.getAttribute('data-name');
+
+        removeItemCart(name);
+    }
+
+})
+
+function removeItemCart(name) {
+    //pegando o index do elemento 
+    const index = cart.findIndex(item => item.name === name);
+
+    if(index !== -1){
+        const item = cart[index];
+        console.log('Clique', item);
+        if(item.quantity > 1){
+            item.quantity -= 1;
+            item.totalPrice -= item.price;
+            updateCartModal();
+            return;
+        }
+        //removendo o item da lista 
+        cart.splice(index, 1);
+        updateCartModal();
+    }
 }
