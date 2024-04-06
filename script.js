@@ -119,3 +119,71 @@ function removeItemCart(name) {
         updateCartModal();
     }
 }
+
+addressInput.addEventListener('input', function(event){
+    let inputValue = event.target.value;
+    if(inputValue !== ''){
+        addressWarn.classList.add('hidden');
+        addressInput.classList.remove('border-red-500');
+    }
+})
+
+
+checkoutBtn.addEventListener('click', function(){
+    const isOpen = checkRestaurantOpen();
+    if(!isOpen){
+        //biblioteca para exibir o alerta personalizado
+        Toastify({
+            text: "Restaurante Fechado!",
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "#FF5555",
+            },
+          }).showToast();
+        return;
+    }
+
+    if(cart.length === 0) return;
+
+    if(addressInput.value === ''){
+        addressWarn.classList.remove('hidden');
+        addressInput.classList.add('border-red-500');
+        return;
+    }
+    //integrando com api do whats
+    const cartItems = cart.map((item) => {
+        return (
+            `${item.name} \n Quantidade: (${item.quantity}) \n Preço: ${parseFloat(item.totalPrice).toFixed(2)}  \n\n`
+        )
+    }).join("");
+    
+    const mensagem = encodeURIComponent(cartItems);
+    const numeroTelefone = '5535997366585';
+    window.open(`https://wa.me/${numeroTelefone}?text=${mensagem} Endereço: ${addressInput.value}`);
+
+
+    cart = [];
+    addressInput.value = '';
+    updateCartModal();
+})
+
+function checkRestaurantOpen() {
+    const data = new Date();
+    const hora = data.getHours();
+    return hora >= 18 && hora < 23;
+}
+
+const spanItem = document.getElementById('date-span');
+const isOpen = checkRestaurantOpen();
+
+if(isOpen) {
+    spanItem.classList.remove('bg-red-500');
+    spanItem.classList.add('bg-green-600');
+} else {
+    spanItem.classList.add('bg-red-500');
+    spanItem.classList.remove('bg-green-600');
+}
