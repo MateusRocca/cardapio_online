@@ -11,6 +11,72 @@ const addressWarn = document.querySelector('#address-warn');
 
 
 let cart = [];
+const cardapioHamburguers = [
+    {
+        name: "Salada Duplo",
+        price: "R$ 22.00",
+        imageSrc: "./assets/hamb-1.png",
+        description: "Pão leve com fermentação natural. Hamburguer duplo de 180g, queijo muçarela, queijo cheddar, alface, cebola e queijo muçarela."
+    },
+    {
+        name: "Bacon Duplo",
+        price: "R$ 30.00",
+        imageSrc: "./assets/hamb-2.png",
+        description: "Pão leve com fermentação natural. Hamburguer duplo de 180g, queijo cheddar e tomate."
+    },
+    {
+        name: "Duplo cheddar",
+        price: "R$ 25.00",
+        imageSrc: "./assets/hamb-3.png",
+        description: "Pão leve com fermentação natural. Hamburguer duplo de 120g, queijo cheddar e maionese da casa."
+    },
+    {
+        name: "Picles",
+        price: "R$ 18.90",
+        imageSrc: "./assets/hamb-4.png",
+        description: "Pão leve com fermentação natural. Hamburguer de 180g, alface, tomate, cebola roxa e picles."
+    },
+    {
+        name: "Salada Duplo",
+        price: "R$ 25.00",
+        imageSrc: "./assets/hamb-5.png",
+        description: "Pão leve com fermentação natural. Hamburguer duplo de 90g, queijo muçarela, alface e tomate."
+    },
+    {
+        name: "Costela",
+        price: "R$ 35.00",
+        imageSrc: "./assets/hamb-6.png",
+        description: "Pão leve com fermentação natural. Hamburguer 180g de costela, cebola roxa, alface, tomate e maionese da casa."
+    },
+    {
+        name: "Duplo sabor",
+        price: "R$ 38.90",
+        imageSrc: "./assets/hamb-7.png",
+        description: "Pão leve com fermentação natural. Hamburguer de 180g, onion rings e molho barbecue."
+    },
+    {
+        name: "Vegano",
+        price: "R$ 30.00",
+        imageSrc: "./assets/hamb-8.png",
+        description: "Pão de batata, hamburguer de brocolis, alface, cenoura, tomate e deliciosa rucula que vai dar um sabor diferenciado."
+    },
+];
+
+const bebidas = [
+    {
+        name: 'Coca-cola',
+        price: 'R$ 5.00',
+        imageSrc: './assets/refri-1.png',
+        description: 'Coca-cola lata 350ml      uma delicosa combinacao de cola com cola e mais cola para voce colar'
+    },
+    {
+        name: 'Guarana',
+        price: 'R$ 5.00',
+        imageSrc: './assets/refri-2.png',
+        description: 'Guarana lata 350ml'
+    },
+
+];
 
 function abrirCarrinho() {
     cartModal.style.display = 'flex';
@@ -174,7 +240,7 @@ checkoutBtn.addEventListener('click', function(){
 function checkRestaurantOpen() {
     const data = new Date();
     const hora = data.getHours();
-    return hora >= 18 && hora < 23;
+    return hora >= 14 && hora < 22;
 }
 
 const spanItem = document.getElementById('date-span');
@@ -187,3 +253,41 @@ if(isOpen) {
     spanItem.classList.add('bg-red-500');
     spanItem.classList.remove('bg-green-600');
 }
+
+
+function adicionarItensCardapioHamburguer(lista, idlista){
+    const novaLista = document.getElementById(idlista);
+
+    lista.forEach((elemento) => {
+        const novoElemento = `
+        
+<div class="flex gap-2">
+    <img src=${elemento.imageSrc} alt=${elemento.name}
+        class="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300">
+
+    <div class="flex flex-col justify-between">
+        <div>
+            <p class="font-bold">
+                ${elemento.name}
+            </p>
+            <p class="text-sm">
+                ${elemento.description}
+            </p>
+        </div>
+
+        <div class="flex items-center gap-2 justify-between mt-3">
+            <p class="font-bold text-lg">${elemento.price}</p>
+            <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name=${elemento.name} data-price=${elemento.price}>
+                <i class="fa fa-cart-plus text-lg text-white"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+        `;
+        novaLista.innerHTML += novoElemento;
+    })
+}
+
+adicionarItensCardapioHamburguer(cardapioHamburguers, 'listaHamb');

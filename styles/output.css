@@ -766,6 +766,10 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -784,6 +788,10 @@ video {
 
 .mt-9 {
   margin-top: 2.25rem;
+}
+
+.ml-auto {
+  margin-left: auto;
 }
 
 .box-border {
