@@ -16,7 +16,7 @@ const cardapioHamburguers = [
         name: "Salada-Duplo",
         price: 22.00,
         imageSrc: "./assets/hamb-1.png",
-        description: "Pão leve com fermentação natural. Hamburguer duplo de 180g, queijo muçarela, queijo cheddar, alface, cebola e queijo muçarela."
+        description: "Pão leve com fermentação natural. Hamburguer duplo de 180g, queijo muçarela, queijo cheddar, alface e cebola."
     },
     {
         name: "Bacon-Duplo",
@@ -64,7 +64,7 @@ const cardapioHamburguers = [
 
 const bebidas = [
     {
-        name: 'Coca-cola',
+        name: 'Coca-Cola',
         price: 5.00,
         imageSrc: './assets/refri-1.png',
         description: 'Coca-cola lata 350ml'
@@ -74,6 +74,30 @@ const bebidas = [
         price: 5.00,
         imageSrc: './assets/refri-2.png',
         description: 'Guarana lata 350ml'
+    },
+    {
+        name: 'Guarana-Jesus',
+        price: 5.00,
+        imageSrc: './assets/gjesus.webp',
+        description: 'Guarana Jesus lata 350ml'
+    },
+    {
+        name: 'Pepsi-Black',
+        price: 5.00,
+        imageSrc: './assets/pepsi.png',
+        description: 'Pepsi lata 350ml'
+    },
+    {
+        name: 'Monster',
+        price: 9.00,
+        imageSrc: './assets/monster.webp',
+        description: 'Energético Monster lata 473ml'
+    },
+    {
+        name: 'Coca-Cola',
+        price: 12.00,
+        imageSrc: './assets/coca-cola-2l.png',
+        description: 'Coca-Cola 2 Litros'
     },
 
 ];
@@ -145,6 +169,7 @@ function updateCartModal() {
         `;
         quantidade += item.quantity;
         total += item.price * item.quantity;
+        item.totalPrice = item.price * item.quantity;
         cartItensContainer.appendChild(cartItemElement);
     })
 

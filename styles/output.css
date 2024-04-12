@@ -671,10 +671,6 @@ video {
   left: 0px;
 }
 
-.right-0 {
-  right: 0px;
-}
-
 .top-0 {
   top: 0px;
 }
@@ -1968,7 +1964,7 @@ video {
 }
 
 .bg-home {
-  background-image: url('/assets/bg.png');
+  background-image: url('/assets/bg.jpg');
 }
 
 .decoration-slice {
@@ -2198,25 +2194,12 @@ video {
   line-height: 1.75rem;
 }
 
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
 .font-bold {
   font-weight: 700;
 }
 
 .font-medium {
   font-weight: 500;
-}
-
-.font-thin {
-  font-weight: 100;
-}
-
-.font-extralight {
-  font-weight: 200;
 }
 
 .uppercase {
