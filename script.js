@@ -250,7 +250,7 @@ checkoutBtn.addEventListener('click', function(){
     }).join("");
     
     const mensagem = encodeURIComponent(cartItems);
-    const numeroTelefone = '5535997366585';
+    const numeroTelefone = '#';
     window.open(`https://wa.me/${numeroTelefone}?text=${mensagem} Endereço: ${addressInput.value}`);
 
 
